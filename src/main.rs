@@ -1,8 +1,8 @@
+use curl::easy::Easy;
+use serde::Deserialize;
 use std::env;
 use std::fs;
 use std::io::{stdout, Write};
-use curl::easy::Easy;
-use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 struct CurlConfig {
@@ -23,7 +23,7 @@ fn main() {
         _ => {
             println!("invalid filename");
             return;
-        },
+        }
     };
 
     let conf: CurlConfig = serde_yaml::from_str(&content).unwrap();
@@ -33,7 +33,8 @@ fn main() {
     easy.write_function(|data| {
         stdout().write_all(data).unwrap();
         Ok(data.len())
-    }).unwrap();
+    })
+    .unwrap();
     easy.perform().unwrap();
 
     println!("{}", easy.response_code().unwrap());
