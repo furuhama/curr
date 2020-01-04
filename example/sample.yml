@@ -1,9 +1,18 @@
 ---
+
+# Basic
+
 url: https://example.com
 method: GET
 verbose: false # optional
-show_header: true # optional
+
+# Request
+
 headers: # optional
   - "Authorization: Basic Xxx"
 cookie: a=1; b=2 # optional
+
+# Response
+
+show_header: true # optional
 show_cookie: false # optional
