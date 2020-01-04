@@ -1,0 +1,10 @@
+[package]
+name = "curr"
+version = "0.1.0"
+authors = ["furuhama <furuhama@users.noreply.github.com>"]
+edition = "2018"
+
+[dependencies]
+curl = "0.4.25"
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.8"
