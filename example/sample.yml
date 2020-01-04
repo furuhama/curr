@@ -1,2 +1,3 @@
 ---
 url: https://example.com
+verbose: false # optional
