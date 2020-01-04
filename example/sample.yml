@@ -4,6 +4,7 @@
 
 url: https://example.com
 method: GET
+
 verbose: false # optional
 
 # Request
