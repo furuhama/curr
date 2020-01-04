@@ -33,7 +33,6 @@ fn main() {
     let conf: CurlConfig = serde_yaml::from_str(&content).unwrap();
 
     let mut easy = Easy::new();
-    let mut list = List::new();
 
     easy.url(&conf.url).unwrap();
     match conf.verbose {
@@ -50,7 +49,9 @@ fn main() {
     }
     match conf.headers {
         Some(hs) => {
+            let mut list = List::new();
             hs.iter().for_each(|h| list.append(&h).unwrap());
+            easy.http_headers(list).unwrap();
         },
         None => {},
     }
@@ -61,7 +62,6 @@ fn main() {
         None => {},
     }
 
-    easy.http_headers(list).unwrap();
     easy.write_function(|data| {
         stdout().write_all(data).unwrap();
         Ok(data.len())
