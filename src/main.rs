@@ -1,4 +1,4 @@
-use curl::easy::Easy;
+use curl::easy::{Easy, List};
 use serde::Deserialize;
 use std::env;
 use std::fs;
@@ -8,6 +8,7 @@ use std::io::{stdout, Write};
 struct CurlConfig {
     url: String,
     verbose: Option<bool>,
+    headers: Option<Vec<String>>,
 }
 
 fn main() {
@@ -30,6 +31,7 @@ fn main() {
     let conf: CurlConfig = serde_yaml::from_str(&content).unwrap();
 
     let mut easy = Easy::new();
+    let mut list = List::new();
 
     easy.url(&conf.url).unwrap();
     match conf.verbose {
@@ -38,7 +40,14 @@ fn main() {
         },
         None => {},
     }
+    match conf.headers {
+        Some(hs) => {
+            hs.iter().for_each(|h| list.append(&h).unwrap());
+        },
+        None => {},
+    }
 
+    easy.http_headers(list).unwrap();
     easy.write_function(|data| {
         stdout().write_all(data).unwrap();
         Ok(data.len())
