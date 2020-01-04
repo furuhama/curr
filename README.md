@@ -14,7 +14,7 @@ url: https://example.com
 That's all. Just run `curr` command with yaml filename.
 
 ```
-$ curr curl.yml
+$ curr sample.yml
 ```
 
 and you'll get the result.
