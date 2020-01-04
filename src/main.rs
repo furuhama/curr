@@ -11,6 +11,7 @@ struct CurlConfig {
     show_header: Option<bool>,
     headers: Option<Vec<String>>,
     cookie: Option<String>,
+    show_cookie: Option<bool>,
 }
 
 fn main() {
@@ -68,6 +69,15 @@ fn main() {
     })
     .unwrap();
     easy.perform().unwrap();
+    match conf.show_cookie {
+        Some(sc) => {
+            if sc {
+                let cookie = easy.cookies().unwrap();
+                dbg!(cookie);
+            }
+        },
+        None => {},
+    }
 
     println!("{}", easy.response_code().unwrap());
 }
