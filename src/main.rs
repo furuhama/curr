@@ -7,6 +7,7 @@ use std::io::{stdout, Write};
 #[derive(Debug, Deserialize)]
 struct CurlConfig {
     url: String,
+    method: String,
     verbose: Option<bool>,
     show_header: Option<bool>,
     headers: Option<Vec<String>>,
@@ -36,6 +37,11 @@ fn main() {
     let mut easy = Easy::new();
 
     easy.url(&conf.url).unwrap();
+    match &*conf.method.to_uppercase() {
+        "POST" => { easy.post(true).unwrap(); },
+        _ => { easy.get(true).unwrap(); },
+    }
+
     match conf.verbose {
         Some(v) => {
             easy.verbose(v).unwrap();
