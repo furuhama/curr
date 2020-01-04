@@ -10,6 +10,7 @@ struct CurlConfig {
     verbose: Option<bool>,
     show_header: Option<bool>,
     headers: Option<Vec<String>>,
+    cookie: Option<String>,
 }
 
 fn main() {
@@ -50,6 +51,12 @@ fn main() {
     match conf.headers {
         Some(hs) => {
             hs.iter().for_each(|h| list.append(&h).unwrap());
+        },
+        None => {},
+    }
+    match conf.cookie {
+        Some(c) => {
+            easy.cookie(&c).unwrap();
         },
         None => {},
     }

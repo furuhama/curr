@@ -4,3 +4,4 @@ verbose: false # optional
 show_header: true # optional
 headers: # optional
   - "Authorization: Basic Xxx"
+cookie: a=1; b=2 # optional
