@@ -10,12 +10,11 @@ First, prepare yaml file for curl execution
 ---
 url: https://example.com
 method: GET
-verbose: false # optional
-show_header: true # optional
-headers: # optional
+
+verbose: false
+
+headers:
   - "Authorization: Basic Xxx"
-cookie: a=1; b=2 # optional
-show_cookie: false # optional
 ```
 
 That's all. Just run `curr` command with yaml filename.
@@ -75,3 +74,7 @@ and you'll get the result.
 </html>
 200
 ```
+
+## Details
+
+See example/sample.yml(example/sample.yml).
