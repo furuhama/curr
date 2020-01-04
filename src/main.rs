@@ -8,6 +8,7 @@ use std::io::{stdout, Write};
 struct CurlConfig {
     url: String,
     verbose: Option<bool>,
+    show_header: Option<bool>,
     headers: Option<Vec<String>>,
 }
 
@@ -37,6 +38,12 @@ fn main() {
     match conf.verbose {
         Some(v) => {
             easy.verbose(v).unwrap();
+        },
+        None => {},
+    }
+    match conf.show_header {
+        Some(sh) => {
+            easy.show_header(sh).unwrap();
         },
         None => {},
     }
