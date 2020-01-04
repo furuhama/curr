@@ -7,6 +7,7 @@ use std::io::{stdout, Write};
 #[derive(Debug, Deserialize)]
 struct CurlConfig {
     url: String,
+    verbose: Option<bool>,
 }
 
 fn main() {
@@ -29,7 +30,15 @@ fn main() {
     let conf: CurlConfig = serde_yaml::from_str(&content).unwrap();
 
     let mut easy = Easy::new();
+
     easy.url(&conf.url).unwrap();
+    match conf.verbose {
+        Some(v) => {
+            easy.verbose(v).unwrap();
+        },
+        None => {},
+    }
+
     easy.write_function(|data| {
         stdout().write_all(data).unwrap();
         Ok(data.len())
