@@ -9,6 +9,13 @@ First, prepare yaml file for curl execution
 ```yaml
 ---
 url: https://example.com
+method: GET
+verbose: false # optional
+show_header: true # optional
+headers: # optional
+  - "Authorization: Basic Xxx"
+cookie: a=1; b=2 # optional
+show_cookie: false # optional
 ```
 
 That's all. Just run `curr` command with yaml filename.
